@@ -32,30 +32,27 @@ const Map = () => {
     
       // Example map data, replace this with your own logic
       const map = Array(600).fill(null).map(() => Array(600).fill(0));
+     
+
+
       const fillRandom = (value, count) => {
-      let remaining = count;
+        let remaining = count;
         while (remaining > 0) {
-          const x = Math.floor(Math.random() * 60);
-          const y = Math.floor(Math.random() * 60);
+          const x = Math.floor(Math.random() * 30) % 60;
+          const y = Math.floor(Math.random() * 40) % 80;
           if (map[x][y] === 0) {
             map[x][y] = value;
             remaining--;
           }
         }
       };
-  
+
       fillRandom(1, 10);
-      fillRandom(2, 4);
-      fillRandom(3, 4);
-      fillRandom(4, 1);
-  
-      const totalZeroes = Math.floor((60*20) / 2);
-      fillRandom(5, totalZeroes);
-  
+      fillRandom(5, 200);
       // Draw the map on the canvas
       for (let i = 0; i < map.length; i++) {
         for (let j = 0; j < map[i].length; j++) {
-          const color = map[i][j] === 5 ? 'white' : 'grey';
+          const color = map[i][j] === 1 ? 'white' : 'grey';
           ctx.fillStyle = color;
           ctx.fillRect(i * blockSize, j * blockSize, blockSize, blockSize);
         }
