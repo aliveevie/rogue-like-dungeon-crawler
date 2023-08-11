@@ -33,22 +33,21 @@ const Map = () => {
       // Example map data, replace this with your own logic
       const map = Array(600).fill(null).map(() => Array(600).fill(0));
      
+      const centerX = Math.floor(map.length / 2)
+      const centerY = Math.floor(map[0].length / 2)
 
 
       const fillRandom = (value, count) => {
         let remaining = count;
         while (remaining > 0) {
-          const x = Math.floor(Math.random() * 30) % 60;
-          const y = Math.floor(Math.random() * 40) % 80;
-          if (map[x][y] === 0) {
-            map[x][y] = value;
+          if (map[centerX][centerY] === 0) {
+            map[centerX][centerY] = value;
             remaining--;
           }
         }
       };
 
-      fillRandom(1, 10);
-      fillRandom(5, 200);
+      fillRandom(1, 20);
       // Draw the map on the canvas
       for (let i = 0; i < map.length; i++) {
         for (let j = 0; j < map[i].length; j++) {
