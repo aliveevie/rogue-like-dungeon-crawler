@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-
+import { draw } from "../controllers/functions";
 
 export function Game(){
 const [xp, setXp] = useState(30);
@@ -8,10 +8,9 @@ const [health, setHealth] = useState(100);
 const [weapon, setWeapon] = useState('Knife');
 const [damage, setDamage] = useState(15);
 const [enemies, setEnemies] = useState(10);
-
-const [map, setMap] = useState(Array(100).fill(null)
-    .map(() => Array(100)
-    .fill({ x: 0, y:0 })));
+const [map, setMap] = useState(Array.from({ length: 50 }, () =>
+Array.from({ length: 50 }, () => (Math.random() < 0.5 ? 0 : 1))
+))
 
 const myCanvas = useRef(null);
 const ctxRef = useRef(null);
@@ -21,19 +20,8 @@ useEffect(() => {
     const canvas = myCanvas.current;
     const context = canvas.getContext('2d')
     ctxRef.current = context;
-    draw();
+    draw(ctxRef.current, map);
 }, []);
-
-
-function draw(){
-    const ctx = ctxRef.current
-
-    ctx.beginPath();
-    ctx.rect(0,0,10,10);
-    ctx.fillStyle = 'red';
-    ctx.fill();
-    ctx.closePath();
-}
 
     return (
         <div > 
@@ -47,8 +35,8 @@ function draw(){
           </div>
           <canvas
           ref={myCanvas}
-          width={600}
-          height={400}
+          width={800}
+          height={600}
           />
         </div>
         
