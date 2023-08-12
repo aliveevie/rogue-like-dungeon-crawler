@@ -1,7 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import { View } from './components/components';
-
+import { Game } from './components/Game';
 
 function App() {
 
@@ -9,7 +8,7 @@ function App() {
     <div className="App">
       <div className="App-header">
 
-      <View />
+      <Game />
       </div>
     </div>
   );
